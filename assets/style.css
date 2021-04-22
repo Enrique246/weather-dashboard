@@ -1,0 +1,22 @@
+.hbackground {
+    background-image: linear-gradient(to right, rgba(16, 89, 247, 0.892), rgb(27, 0, 125));
+    text-align: center;
+    color:white;
+}
+
+.favorable {
+    background-color: #09f888;
+    color: white;
+    padding: 3px;
+  }
+  
+  .moderate {
+    background-color: #f7fb0a;
+    padding: 3px;
+  }
+  
+  .severe {
+    background-color: #f50b0b;
+    color: white;
+    padding: 3px;
+  }
