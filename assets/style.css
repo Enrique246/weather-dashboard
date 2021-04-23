@@ -4,6 +4,14 @@
     color:white;
 }
 
+.data-list{
+    line-height: 0.5;
+    border: none;
+}
+.card-body{
+    flex:auto
+}
+
 .favorable {
     background-color: #09f888;
     color: white;
