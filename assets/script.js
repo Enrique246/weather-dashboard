@@ -72,21 +72,24 @@ let dWeather = function (weather, sCity) {
 
   let weatherIcon = document.createElement("img");
   weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`);
-    townSearchInputEl.appendChild (weatherIcon);
+    townSearchInputEl.appendChild (weatherIcon)
   // Temperature
   let tempEl = document.createElement("span");
   tempEl.textContent= "Temperature: " + weather.main.temp + " ºF";
-  tempEl.classList = "data-list";
+  tempEl.classList = "list-group-item";
+
+  //"list-group-item"
+  // https://getbootstrap.com/docs/5.0/components/list-group/
 
   //Humidity
   let humEl = document.createElement("span");
-  tempEl.textContent = "Humidity: " + weather.main.humidity + " %";
-  tempEl.classList = "data-list";
+  humEl.textContent = "Humidity: " + weather.main.humidity + " %";
+  humEl.classList = "list-group-item";
 
   //Wind
   let windEl = document.createElement("span");
-  tempEl.textContent = "Wind speed: " + weather.wind.speed + " MPH";
-  tempEl.classList = "data-list";
+  windEl.textContent = "Wind speed: " + weather.wind.speed + " MPH";
+  windEl.classList = "list-group-item";
 
   //Appending to box
   wContainerEl.appendChild(tempEl);
