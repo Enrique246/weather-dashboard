@@ -9,34 +9,11 @@ let especulationTitle = document.querySelector("#especulation");
 let fiveDayBox = document.querySelector("#five-box");
 let pSearchEl = document.querySelector("#p-search-b");
 
-// Search button handler
-// Trim: removes whitespace form both ends of a string
-
-let searchHandler = function (event) {
-    console.log("click");
-    event.preventDefault();
-  
-    let town = townTitleEl.value.trim();
-    console.log(town);
-    if (town) {
-      goTownWeather(town);
-    //    go5Days(town);
-    //    savedCities.unshift({town});
-    //   townTitleEl.value = "";
-    // } else {
-    //     alert ("Enter a City");
-    // }
-    // sSearch();
-    // pSearch();
-  };
-}
-  
-  townFormEl.addEventListener("click", searchHandler);
-
+// console.log ("hello");
 //Fetch API
 // API key : a9e17a63f8c99240e7dabe900a8ce415
 let goTownWeather = function (town) {
-  console.log("goTownWeather");
+  
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${town}&units=imperial&appid=a9e17a63f8c99240e7dabe900a8ce415`
   )
@@ -95,19 +72,75 @@ let dWeather = function (weather, sCity) {
   wContainerEl.appendChild(tempEl);
   wContainerEl.appendChild(humEl);
   wContainerEl.appendChild(windEl);
+
+let latitud = weather.coord.lat;
+let long = weather.coord.lon;
+
+goUV(latitud,long);
 };
 
-// var formSumbitHandler = function(event){
-//     event.preventDefault();
-//     var city = cityInputEl.value.trim();
-//     if(city){
-//         getCityWeather(city);
-//         get5Day(city);
-//         cities.unshift({city});
-//         cityInputEl.value = "";
-//     } else{
-//         alert("Please enter a City");
-//     }
-//     saveSearch();
-//     pastSearch(city);
-// }
+let goUV = function (latitud,long) {
+    fetch(
+        `https://api.openweathermap.org/data/2.5/uvi?appid=a9e17a63f8c99240e7dabe900a8ce415&lat=${latitud}&lon=${long}`
+      )
+// console.log(goUV)
+        .then(function (response) {
+          //console.log(response);
+           response.json();
+        })
+        .then(function (data) {
+         
+            dUvIndex(data);
+             //console.log(data);
+        });
+    }
+let dUvIndex = function (base) {
+   console.log(base) 
+    let uvBaseEl = document.createElement("div");
+    uvBaseEl.textContent = "Ultra-Violet Index : ";
+    uvBaseEl.classList = "list-group-item";
+
+    uvBaseValue = document.createElement("span");
+    uvBaseValue.textContent = base.value;
+
+    if (base.value <= 3) {
+        uvBaseValue.classList = "favorable";
+    } else if (base.value > 3 && base.value <= 7){
+        uvBaseValue.classList = "moderate"
+    }
+
+    else if (base.value > 8) {
+        uvBaseValue.classList = "severe"
+
+    };
+
+    uvBaseEl.appendChild(uvBaseValue);
+
+    wContainerEl.appendChild(uvBaseEl);
+
+}; 
+
+// Search button handler
+// Trim: removes whitespace form both ends of a string
+
+let searchHandler = function (event) {
+    console.log("click");
+    event.preventDefault();
+  
+    let town = townTitleEl.value.trim();
+    console.log(town);
+    if (town) {
+      goTownWeather(town);
+    //    go5Days(town);
+    //    savedCities.unshift({town});
+    //   townTitleEl.value = "";
+    // } else {
+    //     alert ("Enter a City");
+    // }
+    // sSearch();
+    // pSearch();
+  };
+}
+  
+townFormEl.addEventListener("click", searchHandler);
+
