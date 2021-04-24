@@ -28,7 +28,7 @@ let goTownWeather = function (town) {
 };
 
 let sSearch = function () {
-  localStorage.setitem("savedCities", JSON.stringify(savedCities));
+  localStorage.setItem("savedCities", JSON.stringify(savedCities));
 };
 
 //Clean older content
@@ -173,7 +173,7 @@ nextEl.appendChild(wIcon);
 
  let nextHumEl = document.createElement("span");
  nextHumEl.classList = "card-body border bg-success m-1 p-1 text-center"
-nextHumEl.textContent = "Hum: " + dForecast.main.temp + " %";
+nextHumEl.textContent = "Hum: " + dForecast.main.humidity + " %";
 
 nextEl.appendChild(nextHumEl);
  
@@ -181,6 +181,28 @@ nextEl.appendChild(nextHumEl);
  fiveDayBoxEl.appendChild(nextEl);
 
      }
+}
+
+// Display of search names
+
+let pSearch = function(pSearch) {
+
+  pastSeEl = document.createElement("button");
+  pastSeEl.textContent = pSearch;
+  pastSeEl.classList = "d-flex w-100 btn-white border p-2";
+  pastSeEl.setAttribute("data-town", pSearch);
+  pSearchEl.setAttribute("type", "submit");
+
+  pSearchEl.prepend(pastSeEl);
+
+}
+
+let pSearchHand = function (e) {
+  let town = e.target.getAttribute("data-town");
+  if (town) {
+    goTownWeather (town);
+    go5Day (town);
+  }
 }
 
 
@@ -199,8 +221,8 @@ let searchHandler = function (event) {
        savedCities.unshift({town});
        townTitleEl.value = "";
      
-     //sSearch();
-    // pSearch();
+     sSearch();
+     pSearch(town);
   };
 }
   
