@@ -157,15 +157,25 @@ console.log(dForecast);
  nextEl.appendChild(nextDate);
 
  //Image
-//nextTempEl.setAttribute ("src", `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`);
- // Forecast card
-
+let wIcon = document.createElement("img");
+wIcon.classList = "card-body img-thumbnail m-1 p-1 text-center"; 
+wIcon.setAttribute ("src", `https://openweathermap.org/img/wn/${dForecast.weather[0].icon}@2x.png`);
+ // Calling Image
+nextEl.appendChild(wIcon);
 
  //Temperature card
  let nextTempEl=document.createElement("span");
  nextTempEl.classList="card-body border bg-success m-1 p-1 text-center";
- nextTempEl.textContent = dForecast.main.temp + " ºF";
- nextEl.appendChild(nextTempEl)
+ nextTempEl.textContent = "Temp: " + dForecast.main.temp + " ºF";
+ nextEl.appendChild(nextTempEl);
+
+ // Humidity Card
+
+ let nextHumEl = document.createElement("span");
+ nextHumEl.classList = "card-body border bg-success m-1 p-1 text-center"
+nextHumEl.textContent = "Hum: " + dForecast.main.temp + " %";
+
+nextEl.appendChild(nextHumEl);
  
  // Five box container
  fiveDayBoxEl.appendChild(nextEl);
