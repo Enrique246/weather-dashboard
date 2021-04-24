@@ -86,7 +86,7 @@ let goUV = function (latitud,long) {
 // console.log(goUV)
         .then(function (response) {
           //console.log(response);
-           response.json();
+          return response.json();
         })
         .then(function (data) {
          
@@ -119,6 +119,10 @@ let dUvIndex = function (base) {
     wContainerEl.appendChild(uvBaseEl);
 
 }; 
+
+// 5-day boxes
+
+
 
 // Search button handler
 // Trim: removes whitespace form both ends of a string
