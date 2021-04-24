@@ -6,7 +6,7 @@ let townTitleEl = document.querySelector("#search-input");
 let wContainerEl = document.querySelector("#selected-weather-box");
 let townSearchInputEl = document.querySelector("#current-city");
 let especulationTitle = document.querySelector("#especulation");
-let fiveDayBox = document.querySelector("#five-box");
+let fiveDayBoxEl = document.querySelector("#five-box");
 let pSearchEl = document.querySelector("#p-search-b");
 
 // console.log ("hello");
@@ -140,7 +140,7 @@ let go5Day = function (town) {
 
     // Display 5 boxes
     let d5Day = function(weather) {
-     fiveDayBox.textContent = "";
+     fiveDayBoxEl.textContent = "";
      especulationTitle.textContent = "Five-Day Forecast";
 
      let next = weather.list;
@@ -163,9 +163,12 @@ console.log(dForecast);
 
  //Temperature card
  let nextTempEl=document.createElement("span");
- nextTempEl.classList="card-body list-group-item text-center";
+ nextTempEl.classList="card-body border bg-success m-1 p-1 text-center";
  nextTempEl.textContent = dForecast.main.temp + " ºF";
+ nextEl.appendChild(nextTempEl)
  
+ // Five box container
+ fiveDayBoxEl.appendChild(nextEl);
 
      }
 }
