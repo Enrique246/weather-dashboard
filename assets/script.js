@@ -63,6 +63,11 @@ let dWeather = function (weather, sCity) {
   humEl.textContent = "Humidity: " + weather.main.humidity + " %";
   humEl.classList = "list-group-item";
 
+// The Element.classList 
+//Is a read-only property that returns a live DOMTokenList collection of the class attributes of the element. This can then be used to manipulate the class list.
+//https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+
+
   //Wind
   let windEl = document.createElement("span");
   windEl.textContent = "Wind speed: " + weather.wind.speed + " MPH";
@@ -72,6 +77,9 @@ let dWeather = function (weather, sCity) {
   wContainerEl.appendChild(tempEl);
   wContainerEl.appendChild(humEl);
   wContainerEl.appendChild(windEl);
+
+  //Fileds in API response
+  //https://openweathermap.org/weather-data
 
 let latitud = weather.coord.lat;
 let long = weather.coord.lon;
@@ -150,7 +158,11 @@ let go5Day = function (town) {
  let nextEl=document.createElement("div");
  nextEl.classList= "card bg-success text-white m-2";
 console.log(dForecast);
+
  // Date box
+ // Unix Timestamp (seconds) 1.6.0+moment.unix(Number)
+ // https://momentjs.com/docs/
+
  let nextDate = document.createElement("h5");
  nextDate.textContent=moment.unix(dForecast.dt).format ("MMM D, YYY");
  nextDate.classList = "card-header text-center";
@@ -219,6 +231,9 @@ let searchHandler = function (event) {
       goTownWeather(town);
        go5Day(town);
        savedCities.unshift({town});
+       //The unshift() method 
+       //Adds one or more elements to the beginning of an array and returns the new length of the array.
+       //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift
        townTitleEl.value = "";
      
      sSearch();
