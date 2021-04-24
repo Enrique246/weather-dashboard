@@ -198,13 +198,11 @@ let searchHandler = function (event) {
        go5Day(town);
        savedCities.unshift({town});
        townTitleEl.value = "";
-     } else {
-        alert ("Enter a City");
-    }
+     
      //sSearch();
     // pSearch();
   };
-
+}
   
 townFormEl.addEventListener("click", searchHandler);
 
