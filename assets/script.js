@@ -81,7 +81,7 @@ goUV(latitud,long);
 
 let goUV = function (latitud,long) {
     fetch(
-        `https://api.openweathermap.org/data/2.5/uvi?appid=a9e17a63f8c99240e7dabe900a8ce415&lat=${latitud}&lon=${long}`
+      `https://api.openweathermap.org/data/2.5/uvi?appid=a9e17a63f8c99240e7dabe900a8ce415&lat=${latitud}&lon=${long}`
       )
 // console.log(goUV)
         .then(function (response) {
@@ -105,12 +105,13 @@ let dUvIndex = function (base) {
 
     if (base.value <= 3) {
         uvBaseValue.classList = "favorable";
+
     } else if (base.value > 3 && base.value <= 7){
-        uvBaseValue.classList = "moderate"
+        uvBaseValue.classList = "moderate";
     }
 
     else if (base.value > 8) {
-        uvBaseValue.classList = "severe"
+        uvBaseValue.classList = "severe";
 
     };
 
@@ -121,7 +122,53 @@ let dUvIndex = function (base) {
 }; 
 
 // 5-day boxes
+let go5Day = function (town) {
+    fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${town}&units=imperial&appid=a9e17a63f8c99240e7dabe900a8ce415`
+      )
+// console.log(goUV)
+        .then(function (response) {
+          //console.log(response);
+          return response.json();
+        })
+        .then(function (data) {
+         
+            d5Day(data);
+             //console.log(data);
+        });
+    }
 
+    // Display 5 boxes
+    let d5Day = function(weather) {
+     fiveDayBox.textContent = "";
+     especulationTitle.textContent = "Five-Day Forecast";
+
+     let next = weather.list;
+     for(var i=5;i < next.length; i=i+8) {
+ let dForecast = next[i];
+
+ let nextEl=document.createElement("div");
+ nextEl.classList= "card bg-success text-white m-2";
+console.log(dForecast);
+ // Date box
+ let nextDate = document.createElement("h5");
+ nextDate.textContent=moment.unix(dForecast.dt).format ("MMM D, YYY");
+ nextDate.classList = "card-header text-center";
+ nextEl.appendChild(nextDate);
+
+ //Image
+//nextTempEl.setAttribute ("src", `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`);
+ // Forecast card
+
+
+ //Temperature card
+ let nextTempEl=document.createElement("span");
+ nextTempEl.classList="card-body list-group-item text-center";
+ nextTempEl.textContent = dForecast.main.temp + " ºF";
+ 
+
+     }
+}
 
 
 // Search button handler
@@ -135,16 +182,16 @@ let searchHandler = function (event) {
     console.log(town);
     if (town) {
       goTownWeather(town);
-    //    go5Days(town);
-    //    savedCities.unshift({town});
-    //   townTitleEl.value = "";
-    // } else {
-    //     alert ("Enter a City");
-    // }
-    // sSearch();
+       go5Day(town);
+       savedCities.unshift({town});
+       townTitleEl.value = "";
+     } else {
+        alert ("Enter a City");
+    }
+     //sSearch();
     // pSearch();
   };
-}
+
   
 townFormEl.addEventListener("click", searchHandler);
 
